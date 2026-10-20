@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexStream - Shorts Cinema Player</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface": "#131315",
+            "surface-tint": "#4cd7f6",
+            "tertiary-container": "#ff817a",
+            "secondary-fixed-dim": "#c0c1ff",
+            "on-primary-fixed-variant": "#004e5c",
+            "error": "#ffb4ab",
+            "on-surface-variant": "#bcc9cd",
+            "surface-dim": "#131315",
+            "on-surface": "#e5e1e4",
+            "on-tertiary-fixed": "#410004",
+            "tertiary": "#ffb3ad",
+            "outline-variant": "#3d494c",
+            "on-tertiary-container": "#7e000f",
+            "on-secondary-fixed-variant": "#2f2ebe",
+            "on-background": "#e5e1e4",
+            "surface-variant": "#353437",
+            "tertiary-fixed-dim": "#ffb3ad",
+            "on-tertiary": "#68000a",
+            "secondary": "#c0c1ff",
+            "on-primary-fixed": "#001f26",
+            "primary": "#4cd7f6",
+            "on-secondary-fixed": "#07006c",
+            "secondary-fixed": "#e1e0ff",
+            "on-primary-container": "#00424f",
+            "primary-fixed-dim": "#4cd7f6",
+            "tertiary-fixed": "#ffdad7",
+            "inverse-primary": "#00687a",
+            "outline": "#869397",
+            "surface-container-low": "#1c1b1d",
+            "primary-fixed": "#acedff",
+            "surface-container-high": "#2a2a2c",
+            "on-tertiary-fixed-variant": "#930013",
+            "background": "#131315",
+            "on-secondary": "#1000a9",
+            "surface-container": "#201f21",
+            "on-secondary-container": "#b0b2ff",
+            "inverse-on-surface": "#313032",
+            "error-container": "#93000a",
+            "on-primary": "#003640",
+            "on-error-container": "#ffdad6",
+            "inverse-surface": "#e5e1e4",
+            "primary-container": "#06b6d4",
+            "secondary-container": "#3131c0",
+            "surface-container-highest": "#353437",
+            "surface-container-lowest": "#0e0e10",
+            "surface-bright": "#39393b",
+            "on-error": "#690005"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "gutter": "1.5rem",
+            "margin": "2rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem",
+            "gutter-mobile": "0.75rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Outfit"],
+            "headline-lg": ["Outfit"],
+            "body-lg": ["Manrope"],
+            "body-md": ["Manrope"],
+            "label-sm": ["Manrope"],
+            "body-sm": ["Manrope"],
+            "headline-md": ["Outfit"],
+            "headline-sm": ["Outfit"],
+            "display-hero-mobile": ["Outfit"],
+            "display-hero": ["Outfit"],
+            "label-lg": ["Manrope"],
+            "label-md": ["Manrope"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: inline-flex;
+      animation: marquee 14s linear infinite;
+    }
+    /* Hide scrollbars elegantly */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-[#0A0A0C] text-on-surface antialiased overflow-x-hidden selection:bg-primary selection:text-surface-container-lowest">
+<!-- ==================== TOP NAV BAR (Shared Component Anchor) ==================== -->
+<header class="fixed top-0 left-0 w-full h-16 z-50 flex justify-between items-center px-space-lg bg-surface-container-lowest border-b border-outline-variant/30">
+<!-- Brand Anchor & Menu Toggle -->
+<div class="flex items-center gap-space-md">
+<button class="text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 p-2 rounded-lg transition-colors" title="Toggle Sidebar">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight flex items-center gap-2 cursor-pointer">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-secondary-container via-primary-container to-primary flex items-center justify-center shadow-[0_0_16px_rgba(6,182,212,0.4)]">
+<span class="material-symbols-outlined text-white text-[20px]">bolt</span>
+</div>
+<span>NexStream</span>
+</div>
+</div>
+<!-- Search Bar (on_right / center-right discovery) -->
+<div class="flex-1 max-w-xl mx-space-xl hidden md:flex items-center">
+<div class="w-full relative flex items-center">
+<div class="relative w-full flex items-center">
+<input class="w-full bg-[#101015] border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary/40 rounded-full py-2 pl-4 pr-10 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant/40 outline-none transition-all duration-200" placeholder="Search creators, tech trends, tutorials..." type="text"/>
+<button class="absolute right-3 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+<button class="ml-space-sm p-2 text-on-surface-variant hover:text-on-surface bg-surface-container-low hover:bg-surface-container-high/50 rounded-full transition-all border border-outline-variant/20" title="Search with voice">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+</button>
+</div>
+</div>
+<!-- Trailing Actions & Profile -->
+<div class="flex items-center gap-space-md">
+<!-- Trailing Primary Action: Create -->
+<button class="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-secondary-container to-primary-container text-white text-label-md font-label-md font-bold rounded-full shadow-[0_0_16px_rgba(6,182,212,0.25)] hover:shadow-[0_0_20px_rgba(6,182,212,0.45)] transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Create</span>
+</button>
+<!-- Trailing Action: Notifications -->
+<button class="relative p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 rounded-full transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- User Profile Avatar -->
+<div class="relative cursor-pointer pl-1 group">
+<div class="w-9 h-9 rounded-full ring-2 ring-primary/40 group-hover:ring-primary overflow-hidden transition-all duration-200">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of Hadisa, an innovative software engineer with sleek futuristic studio headphones bathed in ambient neon cyan and soft indigo workstation backlighting, captured in crystal clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfz-o3hZ_c3gPJG-_G-sD7Qq2rqwi7_1QTEHQ-tMq76E_YmgO8_JQovauZM4VhpiLNCCugxzCSU8_42DVcAxCrNcibiukUjFzVcTS3MMNtWY7121ivWIoV2j26_d7r2D8idTY_Ww5t8YSp8AHarO-a4_XJ-C40J6ybOKPVFuprjQHv5unFUyuT1QHDkFAM5Ewequbw3kE5gfZy6KfE7oS4xQXwRxK7rreJL-mknbXcc6Zzt7MHqnfdyw"/>
+</div>
+</div>
+</div>
+</header>
+<!-- ==================== SIDE NAV BAR (Shared Component Anchor) ==================== -->
+<!-- Collapsed/Compact Rail on 1440px Cinema View to amplify center focus while retaining anchor navigation -->
+<aside class="fixed top-16 left-0 h-[calc(100vh-4rem)] w-60 z-40 bg-surface-container-lowest border-r border-outline-variant/30 flex flex-col justify-between p-space-md overflow-y-auto no-scrollbar hidden xl:flex">
+<!-- Main Tab Navigation -->
+<div class="space-y-1">
+<div class="px-space-md py-1 mb-2 text-label-sm font-label-sm uppercase tracking-wider text-outline">Library</div>
+<!-- Tab 1: Home -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant rounded-lg font-medium hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span class="text-label-md font-label-md">Home</span>
+</a>
+<!-- Tab 2: Shorts (ACTIVE SCREEN - Exact Semantic Match) -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm bg-surface-container-high text-primary rounded-lg font-semibold hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98] shadow-[inset_0_0_12px_rgba(6,182,212,0.1)]" href="#">
+<span class="material-symbols-outlined text-[22px] fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-label-md font-label-md">Shorts</span>
+<span class="ml-auto w-1.5 h-4 rounded-full bg-primary shadow-[0_0_8px_#4cd7f6]"></span>
+</a>
+<!-- Tab 3: Subscriptions -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant rounded-lg font-medium hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[22px]">subscriptions</span>
+<span class="text-label-md font-label-md">Subscriptions</span>
+</a>
+<div class="my-3 border-t border-outline-variant/20"></div>
+<!-- Tab 4: History -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant rounded-lg font-medium hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[22px]">history</span>
+<span class="text-label-md font-label-md">History</span>
+</a>
+<!-- Tab 5: Watch Later -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant rounded-lg font-medium hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[22px]">schedule</span>
+<span class="text-label-md font-label-md">Watch Later</span>
+</a>
+<!-- Tab 6: Liked Videos -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant rounded-lg font-medium hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[22px]">thumb_up</span>
+<span class="text-label-md font-label-md">Liked Videos</span>
+</a>
+<!-- Tab 7: Playlists -->
+<a class="flex items-center gap-space-md px-space-md py-space-sm text-on-surface-variant rounded-lg font-medium hover:bg-surface-container hover:text-on-surface transition-colors duration-150 active:scale-[0.98]" href="#">
+<span class="material-symbols-outlined text-[22px]">playlist_play</span>
+<span class="text-label-md font-label-md">Playlists</span>
+</a>
+</div>
+<!-- Sidebar Bottom: CTA & Footers -->
+<div class="space-y-2 pt-2 border-t border-outline-variant/20">
+<div class="p-3 rounded-lg bg-surface-container-low border border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute -right-4 -bottom-4 w-16 h-16 bg-primary/10 rounded-full blur-xl group-hover:bg-primary/20 transition-all"></div>
+<p class="text-label-sm font-label-sm text-on-surface font-semibold mb-1">Creator Studio</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[11px] mb-2 leading-tight">Empowering 4K vertical HDR streaming & analytics.</p>
+<button class="w-full py-1.5 px-3 bg-surface-container-high hover:bg-surface-bright text-primary text-label-sm font-label-sm font-bold rounded-md border border-primary/20 transition-all">
+          Explore Premium
+        </button>
+</div>
+<div class="pt-1 space-y-0.5">
+<a class="flex items-center gap-space-md px-space-md py-1.5 text-on-surface-variant hover:text-on-surface rounded-lg text-body-sm font-body-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-space-md px-space-md py-1.5 text-on-surface-variant hover:text-on-surface rounded-lg text-body-sm font-body-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">help</span>
+<span>Send Feedback</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ==================== MAIN CINEMA STAGE ==================== -->
+<main class="xl:pl-60 pt-16 min-h-screen bg-[#0A0A0C] flex flex-row relative justify-center items-center overflow-hidden">
+<!-- Atmospheric Ambient Glows behind player reflecting the short video tones -->
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[860px] bg-gradient-to-tr from-cyan-600/15 via-indigo-600/10 to-purple-600/20 blur-[120px] pointer-events-none -z-10"></div>
+<div class="absolute left-1/3 top-1/3 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[400px] bg-primary/10 blur-[90px] pointer-events-none -z-10 animate-pulse"></div>
+<!-- Center Stage Flex Container (Player + Action Buttons) -->
+<div class="flex-1 flex items-center justify-center py-6 px-4">
+<div class="flex items-end gap-space-md relative max-w-full">
+<!-- ==================== VERTICAL VIDEO CONTAINER (9:16) ==================== -->
+<div class="relative w-[460px] h-[780px] rounded-2xl overflow-hidden bg-[#16161D] shadow-[0_20px_50px_rgba(0,0,0,0.85)] border border-white/10 group flex flex-col justify-between">
+<!-- Simulated Video Asset Background -->
+<div class="absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-[1.01]" data-alt="A vertical cinematic view of a futuristic code programming workstation with glowing matrix green and vibrant cyan syntax lines cascading down transparent glass monitors. A software developer's hands swiftly type on a custom mechanical RGB keyboard in a dimly lit high-tech cyberpunk creator loft studio." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDMIFNATkyWLB8iUtjSljNMaCqZaW6TaSTrwPCSVscJ_q3Y0BDUZUK_Z-eFZKmfkXAqQVUUhR8agHcRBzJrNOWjDFY_BxVqnQF6FOueo6wYuviOf5kIPI-ngeVJAUOv_11CxkSVd2meqAjssIZwlaaxtiFe4xWsL_jF8O-72kcR0Akg0njl5mI9tcgh9bfRWPhzv8Lpk-iNMeIC8rB-3kv4ZvFFYN35DkR6uhqk5hz1h-0mHkRsN5mhdA')">
+</div>
+<!-- Video Ambient Glass Micro-Highlight Border -->
+<div class="absolute inset-0 rounded-2xl pointer-events-none border border-cyan-400/20 shadow-[inset_0_0_20px_rgba(6,182,212,0.15)] z-20"></div>
+<!-- Top Video Overlay: Quick Controls & Live Tag -->
+<div class="relative z-30 p-space-md flex items-center justify-between bg-gradient-to-b from-black/80 via-black/30 to-transparent">
+<!-- Shorts Category Tag -->
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest/80 backdrop-blur-md border border-white/10 text-primary text-label-sm font-label-sm font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                Tech & Dev
+              </span>
+<span class="text-white/60 text-body-sm font-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">visibility</span>
+                382K
+              </span>
+</div>
+<!-- Header Action Icons -->
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all active:scale-90" title="Audio Toggle">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+<button class="p-2 rounded-full bg-black/40 hover:bg-black/60 backdrop-blur-md text-white transition-all active:scale-90" title="Settings / Quality">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+</button>
+</div>
+</div>
+<!-- Center Play/Pause Micro-Trigger (Invisible hit area with hover indicator) -->
+<div class="absolute inset-0 m-auto w-20 h-20 rounded-full flex items-center justify-center bg-black/40 backdrop-blur-md border border-white/20 text-white opacity-0 group-hover:opacity-80 transition-all duration-200 cursor-pointer hover:scale-110 z-20">
+<span class="material-symbols-outlined text-[40px] ml-1">play_arrow</span>
+</div>
+<!-- Bottom Video Overlay: Creator Profile, Caption & Audio Ticker -->
+<div class="relative z-30 p-space-md bg-gradient-to-t from-[#0A0A0C] via-black/80 to-transparent pt-20">
+<!-- Creator Info Row -->
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-sm">
+<!-- Avatar with gradient ring -->
+<div class="p-0.5 rounded-full bg-gradient-to-tr from-primary to-secondary">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-black">
+<img class="w-full h-full object-cover" data-alt="Hadisa, tech educator and computer scientist in front of soft dual-tone cyan and purple ambient studio lighting, smiling warmly with sharp depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNhSCTfg2ePadn7OnIV0TqC6pWQnfxWKOk1A-ryMXU3TS7IwQdFCrsXpIZyio91kfDnrRSG6cg4ewC9I16HJr4AiVhO8CgODIf2zJgEmlsd19ZUeKjhOAbm3xGhYh6XaLUtabS7clgG2mhewa74cuiI3oJSUkyfAurf5jyEuQ3M85M4EoetdyqFqCvAlSek18SlcPX51R-szo7e9YXEZ8RvGiwN1sxYCtUNveTdsajN3AqBjfbMeyrKA"/>
+</div>
+</div>
+<!-- Channel Name -->
+<div>
+<div class="flex items-center gap-1">
+<span class="text-label-lg font-label-lg text-white font-bold drop-shadow">@hadisa_codes</span>
+<span class="material-symbols-outlined text-primary text-[16px] fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-[11px] text-white/70 font-body-sm">480K Subscribers</span>
+</div>
+</div>
+<!-- Subscribe Button -->
+<button class="px-4 py-1.5 rounded-full bg-white text-black hover:bg-white/90 text-label-md font-label-md font-bold shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all active:scale-95">
+                Subscribe
+              </button>
+</div>
+<!-- Caption / Hashtags -->
+<p class="text-body-md font-body-md text-white/95 line-clamp-2 mb-space-sm font-medium drop-shadow-sm">
+              3 critical mistakes 1st-year CS students make <span class="text-primary hover:underline cursor-pointer">#coding</span> <span class="text-primary hover:underline cursor-pointer">#tech</span> <span class="text-primary hover:underline cursor-pointer">#computerscience</span>
+</p>
+<!-- Scrolling Audio / Music Ticker -->
+<div class="flex items-center gap-2 overflow-hidden bg-black/40 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 w-fit max-w-[320px]">
+<span class="material-symbols-outlined text-primary text-[16px] animate-pulse">graphic_eq</span>
+<div class="overflow-hidden whitespace-nowrap text-body-sm font-body-sm text-white/90">
+<span class="animate-marquee inline-block">
+                  Original Audio - Hadisa Beats • Instrumental Synths • Trending Audio • Original Audio - Hadisa Beats • Instrumental Synths • 
+                </span>
+</div>
+</div>
+<!-- Video Scrubber Progress Bar -->
+<div class="w-full mt-space-md pt-1 relative group/scrubber cursor-pointer">
+<!-- Background Bar Track -->
+<div class="w-full h-1 bg-white/20 rounded-full overflow-hidden relative group-hover/scrubber:h-1.5 transition-all">
+<!-- Buffer Progress -->
+<div class="absolute left-0 top-0 h-full w-[65%] bg-white/30 rounded-full"></div>
+<!-- Play Progress -->
+<div class="absolute left-0 top-0 h-full w-[42%] bg-primary rounded-full shadow-[0_0_8px_#4cd7f6]"></div>
+</div>
+<!-- Glowing Seeker Head -->
+<div class="absolute top-1/2 left-[42%] -translate-y-1/2 -translate-x-1/2 w-3 h-3 bg-white rounded-full ring-2 ring-primary shadow-[0_0_12px_#06b6d4] opacity-0 group-hover/scrubber:opacity-100 transition-opacity"></div>
+</div>
+</div>
+</div>
+<!-- ==================== RIGHT FLOATING ACTION BAR ==================== -->
+<div class="flex flex-col items-center gap-space-md pb-6 z-30">
+<!-- Action 1: Like -->
+<div class="flex flex-col items-center gap-1 group">
+<button class="w-12 h-12 rounded-full bg-[#16161D]/80 hover:bg-surface-container-high border border-white/10 group-hover:border-primary/50 text-white flex items-center justify-center transition-all duration-200 active:scale-90 shadow-lg group-hover:shadow-[0_0_16px_rgba(6,182,212,0.3)]">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">thumb_up</span>
+</button>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-bold">145K</span>
+</div>
+<!-- Action 2: Dislike -->
+<div class="flex flex-col items-center gap-1 group">
+<button class="w-12 h-12 rounded-full bg-[#16161D]/80 hover:bg-surface-container-high border border-white/10 group-hover:border-white/30 text-white flex items-center justify-center transition-all duration-200 active:scale-90 shadow-lg">
+<span class="material-symbols-outlined text-[24px] text-on-surface-variant group-hover:text-white transition-colors">thumb_down</span>
+</button>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Dislike</span>
+</div>
+<!-- Action 3: Comments (Active State Highlighted) -->
+<div class="flex flex-col items-center gap-1 group">
+<button class="w-12 h-12 rounded-full bg-primary/20 border border-primary text-primary flex items-center justify-center transition-all duration-200 shadow-[0_0_16px_rgba(6,182,212,0.35)] active:scale-90">
+<span class="material-symbols-outlined text-[24px] fill" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</button>
+<span class="text-label-sm font-label-sm text-primary font-bold">1,420</span>
+</div>
+<!-- Action 4: Share -->
+<div class="flex flex-col items-center gap-1 group">
+<button class="w-12 h-12 rounded-full bg-[#16161D]/80 hover:bg-surface-container-high border border-white/10 group-hover:border-primary/50 text-white flex items-center justify-center transition-all duration-200 active:scale-90 shadow-lg group-hover:shadow-[0_0_16px_rgba(6,182,212,0.3)]">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">share</span>
+</button>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-bold">8.2K</span>
+</div>
+<!-- Action 5: Remix / Audio -->
+<div class="flex flex-col items-center gap-1 group">
+<button class="w-12 h-12 rounded-full bg-[#16161D]/80 hover:bg-surface-container-high border border-white/10 group-hover:border-primary/50 text-white flex items-center justify-center transition-all duration-200 active:scale-90 shadow-lg">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">cached</span>
+</button>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Remix</span>
+</div>
+<!-- Action 6: 3-Dots More Menu -->
+<button class="w-10 h-10 rounded-full bg-[#16161D]/60 hover:bg-surface-container-high border border-white/10 text-on-surface-variant hover:text-white flex items-center justify-center transition-all duration-150 active:scale-90">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+<!-- Ambient Sound Disc Graphic -->
+<div class="mt-2 w-10 h-10 rounded-full p-0.5 border border-white/20 bg-black flex items-center justify-center animate-spin" style="animation-duration: 8s;">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Micro vinyl record album art badge with neon turquoise electronic waveforms etched onto glossy black acrylic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDeqalBMr0gIlj2Kf_NsejND2-Et2F1adyOufnyp-MdZUceLDh03Z0BQxdmQuhuwYaK0IC_yr8UGxyHYIFsotE83abriMlxJ-Gwnri9yuAqIVNwWY-fE6ksOtzok22zYkmg51cHX4cyJ_82ICXKLNxA-JmjZpu5S-FZrfYcWRNaL_ROtPXddhhvsCBqiaH_syHSbI97rpFZ2TrIQQsSKdke2_SBZ2tb0mF3xC__BJh3WsGeKtkjh7TEg"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== DESKTOP COMMENTS SLIDE-OUT PANEL (360px) ==================== -->
+<div class="w-[360px] h-[calc(100vh-4rem)] bg-surface-container-lowest border-l border-outline-variant/30 flex flex-col z-30 shrink-0">
+<!-- Comments Header -->
+<div class="p-space-md border-b border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<h2 class="text-headline-sm font-headline-sm text-on-surface font-bold">Comments</h2>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary text-label-sm font-label-sm">1,420</span>
+</div>
+<div class="flex items-center gap-1">
+<!-- Sort Dropdown Trigger -->
+<button class="flex items-center gap-1 text-on-surface-variant hover:text-on-surface text-label-md font-label-md px-2 py-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+<span>Top</span>
+</button>
+<!-- Close Comments Panel Button -->
+<button class="text-on-surface-variant hover:text-on-surface p-1 rounded-full hover:bg-surface-container transition-colors" title="Close Panel">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+<!-- Add Comment Input Area -->
+<div class="p-space-md border-b border-outline-variant/20 flex gap-space-sm items-start">
+<div class="w-8 h-8 rounded-full overflow-hidden shrink-0 ring-1 ring-white/20">
+<img class="w-full h-full object-cover" data-alt="Hadisa user profile avatar in high resolution with modern dark tech backdrop." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJZmdEOXHkAAKVgJhMreJhm_Ywoq97eZ36vMnQTufuTqR0FsOV8mZ_sBlsjLJf0Dtoi6LGUUgROh57lTX4gv8oihKd9OOGsfGb2w8wXsHntObfDaNc98uDYc4tL12ZBrhfu4QUt5elG1qsdrCdmBv2haV0ptGRYI_I2qoJF8DR2z12KfQd2sYx5NvqjXyLd8bgmAE2IghRX4xwWlpDEE8EH1yZwFhKZON3DW25694t3v9lA4k4XJ4oqQ"/>
+</div>
+<div class="flex-1 space-y-2">
+<input class="w-full bg-[#101015] border border-outline-variant/30 focus:border-primary focus:ring-1 focus:ring-primary/40 rounded-lg py-2 px-3 text-body-sm font-body-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none transition-all" placeholder="Add a comment as @hadisa..." type="text"/>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">sentiment_satisfied</span>
+</button>
+<button class="p-1 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">gif_box</span>
+</button>
+</div>
+<button class="px-3 py-1 bg-surface-container-high hover:bg-primary hover:text-surface-container-lowest text-on-surface-variant text-label-sm font-label-sm font-bold rounded-full transition-all">
+              Comment
+            </button>
+</div>
+</div>
+</div>
+<!-- Comments Stream List -->
+<div class="flex-1 overflow-y-auto p-space-md space-y-space-md no-scrollbar">
+<!-- Pinned Comment from Creator -->
+<div class="p-3 rounded-lg bg-surface-container-low/70 border border-primary/20 space-y-2">
+<div class="flex items-center gap-1 text-[11px] text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]">push_pin</span>
+<span>Pinned by @hadisa_codes</span>
+</div>
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-full overflow-hidden shrink-0 border border-primary">
+<img class="w-full h-full object-cover" data-alt="Headshot of Hadisa, creator of the coding short." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB8UxPBDYTbGVMVoAssVeqyAuV2JlpNRmRkzhd4MNgQEZw2oKGXnavDq_WgFsreYUuUm6yZGDyuCZCJIgUjIJYgeJPV2pUvEDKJrag2R9v10yIwPScwI0tm-7abhjStzHwBKcMMKcxfzQCX9GX12fba_wCMJEnD25m072DOVBGF83SiC-3r80cPqpEQZeWh0H1s7v6oef8Goli2MAZrxYhkl3wQVNAqtmuTwpiH18MHnYHrCiLhHZ1JQA"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-1.5">
+<span class="text-label-sm font-label-sm text-white font-bold">@hadisa_codes</span>
+<span class="material-symbols-outlined text-primary text-[14px] fill" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-[10px] text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface mt-1">
+                Full roadmap with project repo link is in my bio! What mistake did you make during your first semester? Let me know below 👇
+              </p>
+<div class="flex items-center gap-3 mt-2 text-on-surface-variant text-label-sm font-label-sm">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_up</span>
+<span>1.8K</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_down</span>
+</button>
+<button class="hover:text-white transition-colors">Reply</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Threaded Comment 1 -->
+<div class="flex items-start gap-space-sm group">
+<div class="w-7 h-7 rounded-full overflow-hidden shrink-0 bg-secondary-container flex items-center justify-center text-white text-[11px] font-bold">
+            MC
+          </div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-white font-bold">@marcus_dev</span>
+<span class="text-[10px] text-on-surface-variant">4h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              Mistake #2 hits too close to home... spending 4 days configuring Vim instead of writing actual algorithms 💀
+            </p>
+<div class="flex items-center gap-3 mt-2 text-on-surface-variant text-label-sm font-label-sm">
+<button class="flex items-center gap-1 text-primary hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px] fill" style="font-variation-settings: 'FILL' 1;">thumb_up</span>
+<span>428</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_down</span>
+</button>
+<button class="hover:text-white transition-colors">Reply</button>
+</div>
+<!-- Threaded Sub-Reply -->
+<div class="mt-3 pl-3 border-l-2 border-outline-variant/30 flex items-start gap-2">
+<div class="w-5 h-5 rounded-full overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Profile avatar of tech student reacting to discussion thread." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeYpHV7MRPBFSZX3gyMOCGVl3O5RaqWPFOzRwTjGLq8_gp3aHgzCoPkqv4ypfVoMCUH3GAYw-vXGUfVtyTu6I-c2-4jFJ2s-fO1-wPVqTYS9lqifEaVmLKEjtklzH9umuWx2XbFJbh15Bgf-159vIKCt1g94S9MITRyAPmDz5N5lkwfZBAbMDxdqUbBqtLLntcS3rKgKgW8Nn5d7On-MygWSWGbxLDCK_5cHymrFBx6zv-oQmaKjtNuA"/>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[11px] font-bold text-white">@alex_engineer</span>
+<span class="text-[9px] text-on-surface-variant">2h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant text-[12px] mt-0.5">
+                  Haha but that neovim rice looks majestic though!
+                </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Threaded Comment 2 -->
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-full overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="Creative female developer avatar in minimal studio portrait style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDssod7Gq5mBjMUsYKE5KjDVBAaU7nNDAYtXjP8-CqdHIcaWyKT60nwWvhWqqkNtJpIV3B6yjETyCGN_7LlKHXJA3afz3GyI9e9IT0lloW0E59jjmQfB0fHjveIB_SsLxCIcBmBMAIz9RSx15ZwHWDigVGskNDHEGm7kgZHiRZdUBE76_NIQY4qAcvcarVTjgWDPkFxgbmtRF8KQPOlfCgd6wjXgHOXt1luIYu17xPj6RfWSqQeRGQfkw"/>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-white font-bold">@elena_ui</span>
+<span class="text-[10px] text-on-surface-variant">6h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              The audio track on this is pure fire 🔥 Where did you get that synth stem?
+            </p>
+<div class="flex items-center gap-3 mt-2 text-on-surface-variant text-label-sm font-label-sm">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_up</span>
+<span>89</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_down</span>
+</button>
+<button class="hover:text-white transition-colors">Reply</button>
+</div>
+</div>
+</div>
+<!-- Threaded Comment 3 -->
+<div class="flex items-start gap-space-sm">
+<div class="w-7 h-7 rounded-full overflow-hidden shrink-0 bg-primary-container/30 flex items-center justify-center text-primary text-[11px] font-bold border border-primary/30">
+            ZK
+          </div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-white font-bold">@zack_builds</span>
+<span class="text-[10px] text-on-surface-variant">8h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">
+              Not learning Git early on cost me an entire semester project. Best advice you gave was committing early and often!
+            </p>
+<div class="flex items-center gap-3 mt-2 text-on-surface-variant text-label-sm font-label-sm">
+<button class="flex items-center gap-1 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_up</span>
+<span>154</span>
+</button>
+<button class="hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[15px]">thumb_down</span>
+</button>
+<button class="hover:text-white transition-colors">Reply</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== KEYBOARD NAVIGATION HINT PILL ==================== -->
+<div class="fixed bottom-4 right-[380px] z-40 hidden 2xl:flex items-center gap-3 px-3 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-white/10 text-on-surface-variant text-label-sm font-label-sm shadow-xl">
+<div class="flex items-center gap-1">
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container text-white border border-white/10 text-[10px]">↑</kbd>
+<span>Previous</span>
+</div>
+<span class="text-white/20">|</span>
+<div class="flex items-center gap-1">
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container text-white border border-white/10 text-[10px]">↓</kbd>
+<span>Next</span>
+</div>
+<span class="text-white/20">|</span>
+<div class="flex items-center gap-1">
+<kbd class="px-2 py-0.5 rounded bg-surface-container text-white border border-white/10 text-[10px]">Space</kbd>
+<span>Pause</span>
+</div>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,23 @@
+{
+  "name": "nexstream-web-app",
+  "version": "1.0.0",
+  "description": "NexStream - Modern Video Streaming and Shorts Web Platform built with Google Stitch & Antigravity",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "nexstream",
+    "video-streaming",
+    "shorts",
+    "vibe-coding",
+    "google-stitch",
+    "antigravity"
+  ],
+  "author": "Hadisa (@hadijan)",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
